@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import urlJoin from 'url-join';
-import type { UserApiResponse, User } from '../types';
+import type { ListUsersApiResponse, User } from '../types';
 
 const reqresUrl = 'https://reqres.in/';
 const usersEndpoint = urlJoin(reqresUrl, '/api/users');
@@ -20,9 +20,9 @@ const getUsers = async (page: number): Promise<void> => {
             },
         })
     
-        const data = await response.json() as UserApiResponse[];
+        const data = await response.json() as ListUsersApiResponse;
 
-        users.value = data;
+        users.value = data.data;
     } catch (error) {
         isError.value = true;
     }
