@@ -1,13 +1,16 @@
 <template>
     <div v-if="users.length" class="wrapper">
+        <SearchInput v-model="search" />
+
         <div class="table">
+            
             <div class="table_row">
                 <div class="table_header table__cell"></div>
                 <div class="table_header table__cell">Full Name</div>
                 <div class="table_header table__cell">Actions</div>
             </div>
 
-            <div v-for="user in users" :key="user.id" class="table_row">
+            <div v-for="user in filteredUsers" :key="user.id" class="table_row">
                 <div class="table__cell">
                     <img :src="user.avatar" alt="User avatar" class="table__cell-avatar">
                 </div>
@@ -22,12 +25,28 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, computed } from 'vue';
 import { FilePenLine, Trash } from 'lucide-vue-next';
+import SearchInput from './SearchInput.vue';
 import type { User } from '../types';
 
-defineProps<{
+const props = defineProps<{
     users: User[]
 }>();
+
+const search = ref<string | undefined>();
+
+const filteredUsers = computed(() => {
+    if (!search.value) return props.users;
+
+    const searchedUsers = props.users.filter((user) => {
+        const fullName = `${user.first_name} ${user.last_name}`;
+
+        return fullName.toLowerCase().includes(search.value!.toLowerCase())
+    });
+
+    return searchedUsers;
+});
 </script>
 
 <style lang="scss" scoped>
