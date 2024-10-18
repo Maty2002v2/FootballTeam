@@ -1,6 +1,9 @@
 <template>
     <div v-if="usersData.data.length" class="wrapper">
-        <SearchInput v-model="search" placeholder="Search for users..."  />
+        <div class="header-actions">
+            <SearchInput v-model="search" placeholder="Search for users..."  />
+            <Button :pill="true"><Plus :size="18" /> Add user</Button>
+        </div>
 
         <div class="table">
             
@@ -21,20 +24,27 @@
                 </div>
             </div>
         </div>
-
-        <Pagination :totalItems="usersData.total" @setPaginate="(paginateOptions: PaginationOptions) => $emit('paginateUpdate', paginateOptions)"/>
     </div>
+
+    <Pagination 
+        class="pagination"
+        :totalItems="usersData.total"
+        :freezing="freezingPagination"
+        @setPaginate="(paginateOptions: PaginationOptions) => $emit('paginateUpdate', paginateOptions)"
+    />
 </template>
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import { FilePenLine, Trash } from 'lucide-vue-next';
+import { Plus, FilePenLine, Trash } from 'lucide-vue-next';
 import SearchInput from './SearchInput.vue';
 import Pagination from './Pagination.vue';
+import Button from './Button.vue';
 import type { UsersData, Pagination as PaginationOptions  } from '../types';
 
 const props = defineProps<{
-    usersData: UsersData
+    usersData: UsersData,
+    freezingPagination?: boolean
 }>();
 
 const emit = defineEmits(['paginateUpdate']);
@@ -70,6 +80,12 @@ const filteredUsers = computed(() => {
         max-width: 95vw;
         margin: 0;
     }
+}
+
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .table {
@@ -124,5 +140,9 @@ const filteredUsers = computed(() => {
         width: 20px;
         height: 20px;
     }
+}
+
+.pagination {
+    margin-top: 20px;
 }
 </style>

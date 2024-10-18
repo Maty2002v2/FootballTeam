@@ -1,6 +1,6 @@
 <template>
     <div v-if="usersData">
-        <UsersTable :usersData="usersData" @paginateUpdate="paginateAction"/>
+        <UsersTable :usersData="usersData" :freezingPagination="isLoading" @paginateUpdate="paginateAction"/>
     </div>
 </template>
 
@@ -9,7 +9,7 @@ import UsersTable from '../components/UsersTable.vue';
 import { useReqresApi } from '../composables/useReqresApi';
 import type { Pagination } from '../types/index';
 
-const { usersData, getUsers } = useReqresApi();
+const { usersData, isLoading, getUsers } = useReqresApi();
 getUsers(1);
 
 const paginateAction = async (paginateOptions: Pagination) => {

@@ -6,12 +6,14 @@ const reqresUrl = 'https://reqres.in/';
 const usersEndpoint = urlJoin(reqresUrl, '/api/users');
 
 export const useReqresApi = () => {
+    const isLoading = ref<boolean>(false);
     const isError = ref<boolean>(false);
 
     const usersData = ref<UsersData>();
 
     const getUsers = async (page: number = 1, per_page: number = 4): Promise<void> => {
         isError.value = false;
+        isLoading.value = true;
 
         try {
             const response = await fetch(urlJoin(usersEndpoint, `?page=${page}&per_page=${per_page}`), {
@@ -26,12 +28,15 @@ export const useReqresApi = () => {
             usersData.value = data;
         } catch (error) {
             isError.value = true;
+        } finally {
+            isLoading.value = false;
         }
 
     }
 
     const editUser = async (user: User): Promise<void> => {
         isError.value = false;
+        isLoading.value = true;
         
         const copy = JSON.parse(JSON.stringify(user)); 
         if ('id' in copy) delete copy.id;
@@ -44,15 +49,16 @@ export const useReqresApi = () => {
                 },
                 body: JSON.stringify(copy)
             });
-        
-            
         } catch (error) {
             isError.value = true;
+        } finally {
+            isLoading.value = false;
         }
     }
 
     const createUser = async (user: Omit<User, 'id' | 'email'>): Promise<void> => {
         isError.value = false;
+        isLoading.value = true;
 
         try {
             const response = await fetch(usersEndpoint, {
@@ -66,11 +72,14 @@ export const useReqresApi = () => {
             
         } catch (error) {
             isError.value = true;
+        } finally {
+            isLoading.value = false;
         }
     }
 
     const deleteUser = async (userId: Pick<User, 'id'>): Promise<void> => {
         isError.value = false;
+        isLoading.value = true;
 
         try {
             const response = await fetch(`${usersEndpoint}/${userId}`, {
@@ -83,12 +92,15 @@ export const useReqresApi = () => {
             
         } catch (error) {
             isError.value = true;
+        } finally {
+            isLoading.value = false;
         }
     }
     
     return {
         usersData,
         isError,
+        isLoading,
         getUsers,
         editUser,
         createUser,

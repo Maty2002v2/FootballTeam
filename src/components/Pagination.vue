@@ -19,20 +19,26 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, watch } from 'vue';
+import { onMounted, toRefs, watch } from 'vue';
 import { ChevronsLeft, ChevronsRight } from 'lucide-vue-next';
 import { PaginationConfig } from '../types';
 import{ usePagination } from '../composables/usePagination';
 
-const props = withDefaults(defineProps<PaginationConfig>(), {
+type Props = PaginationConfig & {
+    freezing?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
     currentPage: 1,
     pageSize: 4,
     maxPages: 20,
+    freezing: false
 });
 
-watch(props, (newProps) => {
+const { freezing, ...paginationOptionsProps } = toRefs(props)
+watch(paginationOptionsProps, (newProps) => {
     const { totalItems, currentPage, pageSize, maxPages } = newProps;
-    paginate(totalItems, currentPage, pageSize, maxPages);
+    paginate(totalItems.value, currentPage.value, pageSize.value, maxPages.value);
     emit('setPaginate', pagination.value);
 }, { deep: true})
 
@@ -47,6 +53,8 @@ const {
 } = usePagination(2);
 
 const setPage = (number: number) => {
+    if (props.freezing) return;
+
     const { totalItems, pageSize, maxPages } = props;
     paginate(totalItems, number, pageSize, maxPages);
     
