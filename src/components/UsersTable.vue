@@ -1,6 +1,6 @@
 <template>
-    <div v-if="users.length" class="wrapper">
-        <SearchInput v-model="search" />
+    <div v-if="usersData.data.length" class="wrapper">
+        <SearchInput v-model="search" placeholder="Search for users..."  />
 
         <div class="table">
             
@@ -21,6 +21,8 @@
                 </div>
             </div>
         </div>
+
+        <Pagination :totalItems="usersData.total" @setPaginate="(paginateOptions: PaginationOptions) => $emit('paginateUpdate', paginateOptions)"/>
     </div>
 </template>
 
@@ -28,18 +30,21 @@
 import { ref, computed } from 'vue';
 import { FilePenLine, Trash } from 'lucide-vue-next';
 import SearchInput from './SearchInput.vue';
-import type { User } from '../types';
+import Pagination from './Pagination.vue';
+import type { UsersData, Pagination as PaginationOptions  } from '../types';
 
 const props = defineProps<{
-    users: User[]
+    usersData: UsersData
 }>();
+
+const emit = defineEmits(['paginateUpdate']);
 
 const search = ref<string | undefined>();
 
 const filteredUsers = computed(() => {
-    if (!search.value) return props.users;
+    if (!search.value) return props.usersData.data;
 
-    const searchedUsers = props.users.filter((user) => {
+    const searchedUsers = props.usersData.data.filter((user) => {
         const fullName = `${user.first_name} ${user.last_name}`;
 
         return fullName.toLowerCase().includes(search.value!.toLowerCase())

@@ -1,6 +1,6 @@
 <template>
     <div class="search">
-        <input type="text" v-model="search" class="search__input" placeholder="Search for users...">
+        <input type="text" v-model="search" class="search__input" :placeholder="placeholder">
         <Search class="search__icon" color="#828691" />
     </div>
 </template>
@@ -9,6 +9,10 @@
 import { watch } from 'vue';
 import { refDebounced } from '@vueuse/core';
 import { Search } from 'lucide-vue-next';
+
+defineProps<{
+    placeholder: string
+}>();
 
 const emit = defineEmits(['update:modelValue']);
 
