@@ -9,11 +9,11 @@ const isError = ref<boolean>(false);
 
 const users = ref<User[]>([]);
 
-const getUsers = async (page: number): Promise<void> => {
+const getUsers = async (page: number = 1, per_page: number = 8): Promise<void> => {
     isError.value = false;
 
     try {
-        const response = await fetch(urlJoin(usersEndpoint, `?page=${page}`), {
+        const response = await fetch(urlJoin(usersEndpoint, `?page=${page}&per_page=${per_page}`), {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
