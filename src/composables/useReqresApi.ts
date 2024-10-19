@@ -11,12 +11,16 @@ export const useReqresApi = () => {
 
     const usersData = ref<UsersData>();
 
-    const getUsers = async (page: number = 1, per_page: number = 4): Promise<void> => {
+    const getUsers = async (): Promise<void> => {
         isError.value = false;
         isLoading.value = true;
 
         try {
-            const response = await fetch(urlJoin(usersEndpoint, `?page=${page}&per_page=${per_page}`), {
+            //get all users
+            const firstResponse = await fetch(usersEndpoint);
+            const { total } = await firstResponse.json() as ListUsersApiResponse;
+
+            const response = await fetch(urlJoin(usersEndpoint, `?per_page=${total}`), {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'

@@ -13,7 +13,7 @@
                 <div class="table_header table__cell">Actions</div>
             </div>
 
-            <div v-for="user in filteredUsers" :key="user.id" class="table_row">
+            <div v-for="user in filteredUsers.slice(pagination?.startIndex, (pagination?.endIndex ?? 0) + 1)" :key="user.id" class="table_row">
                 <div class="table__cell">
                     <img :src="user.avatar" alt="User avatar" class="table__cell-avatar">
                 </div>
@@ -29,8 +29,7 @@
     <Pagination 
         class="pagination"
         :totalItems="usersData.total"
-        :freezing="freezingPagination"
-        @setPaginate="(paginateOptions: PaginationOptions) => $emit('paginateUpdate', paginateOptions)"
+        @setPaginate="(paginationOptions) => pagination = paginationOptions"
     />
 </template>
 
@@ -44,12 +43,11 @@ import type { UsersData, Pagination as PaginationOptions  } from '../types';
 
 const props = defineProps<{
     usersData: UsersData,
-    freezingPagination?: boolean
 }>();
 
-const emit = defineEmits(['paginateUpdate']);
-
 const search = ref<string | undefined>();
+
+const pagination = ref<PaginationOptions | undefined>();
 
 const filteredUsers = computed(() => {
     if (!search.value) return props.usersData.data;
