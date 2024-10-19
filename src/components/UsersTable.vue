@@ -28,7 +28,7 @@
 
     <Pagination 
         class="pagination"
-        :totalItems="usersData.total"
+        :totalItems="filteredUsers.length"
         @setPaginate="(paginationOptions) => pagination = paginationOptions"
     />
 </template>
