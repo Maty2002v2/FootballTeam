@@ -41,10 +41,3 @@ Aplikacja została zaprojektowana tak, aby poprawnie wyświetlać się na tablet
 ## Dokumentacja API
 
 Do komunikacji z backendem aplikacja wykorzystuje API dostępne pod tym linkiem: [API Documentation](https://reqres.in/).
-
-## Jak uruchomić aplikację
-
-1. Sklonuj repozytorium na swój lokalny komputer:
-   ```bash
-   git clone https://github.com/twoja_nazwa_uzytkownika/nazwa_projektu.git
-   cd nazwa_projektu
