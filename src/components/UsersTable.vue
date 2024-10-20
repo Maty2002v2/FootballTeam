@@ -119,12 +119,6 @@ const filteredUsers = computed(() => {
         align-items: center;
         padding: 10px;
         background-color: inherit;
-
-        &-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
     }
 
     &__actions {
