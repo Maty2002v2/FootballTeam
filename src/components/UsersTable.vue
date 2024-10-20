@@ -14,7 +14,7 @@
 
             <div v-for="user in filteredUsers.slice(pagination?.startIndex, (pagination?.endIndex ?? 0) + 1)" :key="user.id" class="table_row">
                 <div class="table__cell">
-                    <img :src="user.avatar" alt="User avatar" class="table__cell-avatar">
+                    <AvatarImage :src="user.avatar" width="40px" height="40px" />
                 </div>
                 <div class="table__cell">{{ user.first_name + user.last_name }}</div>
                 <div class="table__cell table__actions">
@@ -39,6 +39,7 @@ import Box from './Box.vue';
 import SearchInput from './SearchInput.vue';
 import Pagination from './Pagination.vue';
 import Button from './Button.vue';
+import AvatarImage from './AvatarImage.vue';
 import type { UsersData, Pagination as PaginationOptions  } from '../types';
 
 const props = defineProps<{
