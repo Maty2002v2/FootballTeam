@@ -21,7 +21,7 @@
                     <RouterLink :to="`/edit-user/${user.id}`">
                         <FilePenLine class="table__icon" color="#ABB2BA"/>
                     </RouterLink>
-                    <Trash class="table__icon" color="#ABB2BA"/>
+                    <Trash class="table__icon" color="#ABB2BA" @click="deleteUser(user.id)" />
                 </div>
             </div>
         </div>
@@ -42,11 +42,14 @@ import SearchInput from './SearchInput.vue';
 import Pagination from './Pagination.vue';
 import Button from './Button.vue';
 import AvatarImage from './AvatarImage.vue';
+import { useReqresApi } from '../composables/useReqresApi';
 import type { UsersData, Pagination as PaginationOptions  } from '../types';
 
 const props = defineProps<{
     usersData: UsersData,
 }>();
+
+const { deleteUser } = useReqresApi();
 
 const search = ref<string | undefined>();
 const pagination = ref<PaginationOptions | undefined>();

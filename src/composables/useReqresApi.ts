@@ -95,19 +95,22 @@ export const useReqresApi = () => {
         }
     }
 
-    const deleteUser = async (userId: Pick<User, 'id'>): Promise<void> => {
+    const deleteUser = async (userId: number): Promise<void> => {
         isError.value = false;
         isLoading.value = true;
 
         try {
-            const response = await fetch(`${usersEndpoint}/${userId}`, {
+            await fetch(`${usersEndpoint}/${userId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                 }
             });
         
-            
+            const deletedUserIndex = usersData.value?.data.findIndex(user => user.id === userId);
+            if (deletedUserIndex == undefined || !usersData.value) return;
+
+            usersData.value.data.splice(deletedUserIndex, 1);
         } catch (error) {
             isError.value = true;
         } finally {
