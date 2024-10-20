@@ -5,7 +5,7 @@
         <h2 class="header">Opss.. Something went wrong</h2>
 
         <slot name="actions">
-            <Button v-if="tryAgainFunction" type="button">
+            <Button v-if="tryAgainFunction" type="button" @click="tryAgainFunction">
                 <slot name="buttonText">Try Again</slot>
             </Button>
         </slot>

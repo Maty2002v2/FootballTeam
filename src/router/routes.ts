@@ -26,6 +26,11 @@ const routes = [
         return false
       },
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('../pages/NotFound.vue'),
+    },
 ];
 
 export function getRoutes() {
