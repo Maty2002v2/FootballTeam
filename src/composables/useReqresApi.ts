@@ -15,6 +15,8 @@ export const useReqresApi = () => {
     const getUsers = async (): Promise<void> => {
         if (usersData.value) return;
 
+        console.log("getUsers")
+
         isError.value = false;
         isLoading.value = true;
 
@@ -57,6 +59,13 @@ export const useReqresApi = () => {
                 },
                 body: JSON.stringify(copy)
             });
+
+            const data = await response.json() as UserApiResponse;
+
+            const editedUserIndex = usersData.value?.data.findIndex(userData => userData.id === user.id);
+            if (editedUserIndex == undefined || !usersData.value) return;
+
+            usersData.value.data[editedUserIndex] = data;
         } catch (error) {
             isError.value = true;
         } finally {
