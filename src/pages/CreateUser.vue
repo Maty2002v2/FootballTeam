@@ -4,14 +4,16 @@
 
         <div class="create-user">
             <Box class="create-user-box">
-                <form class="form">
+                <form v-if="!isLoading" class="form" @submit.prevent="create">
                     <div class="form__inputs">
-                        <Input label="First Name"/>
-                        <Input label="Last Name" />
+                        <Input label="First Name" v-model="firstName" />
+                        <Input label="Last Name" v-model="lastName" />
                     </div>
 
-                    <Button type="button" class="form__button">Create user</Button>
+                    <Button type="button" :disabled="!canCreateUser" class="form__button">Create user</Button>
                 </form>
+
+                <Loader v-else />
             </Box>
 
             <Box class="create-user-box">
@@ -22,12 +24,40 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import PageBox from '../components/PageBox.vue';
 import PageHeader from '../components/PageHeader.vue';
 import Box from '../components/Box.vue';
 import Button from '../components/Button.vue';
 import Input from '../components/Input.vue';
 import LoadAvatarTile from '../components/LoadAvatarTile.vue';
+import Loader from '../components/Loader.vue';
+import { useLoadAvatarModal } from '../composables/Modals/useLoadAvatarModal';
+import { useReqresApi } from '../composables/useReqresApi';
+
+const { avatarLink } = useLoadAvatarModal();
+const { isLoading, createUser } = useReqresApi();
+
+const firstName = ref<string | undefined>();
+const lastName = ref<string | undefined>();
+
+const canCreateUser = computed(() => {
+    return !!firstName.value && !!lastName.value && !!avatarLink.value
+});
+
+const router = useRouter();
+const create = async () => {
+    if (!canCreateUser.value) return;
+
+    await createUser({ 
+        first_name: firstName.value as string, 
+        last_name: lastName.value as string, 
+        avatar: avatarLink.value as string
+    });
+
+    router.push('/')
+}
 </script>
 
 <style lang="scss" scoped>

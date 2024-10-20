@@ -1,17 +1,20 @@
 import { ref } from 'vue';
 import urlJoin from 'url-join';
-import type { ListUsersApiResponse, User, UsersData } from '../types';
+import type { ListUsersApiResponse, User, UserApiResponse, UsersData } from '../types';
+import mockUsersListData from '../helpers/mockUsersListData.json'
 
 const reqresUrl = 'https://reqres.in/';
 const usersEndpoint = urlJoin(reqresUrl, '/api/users');
+
+const usersData = ref<UsersData>();
 
 export const useReqresApi = () => {
     const isLoading = ref<boolean>(false);
     const isError = ref<boolean>(false);
 
-    const usersData = ref<UsersData>();
-
     const getUsers = async (): Promise<void> => {
+        if (usersData.value) return;
+
         isError.value = false;
         isLoading.value = true;
 
@@ -32,6 +35,7 @@ export const useReqresApi = () => {
             usersData.value = data;
         } catch (error) {
             isError.value = true;
+            usersData.value = mockUsersListData;
         } finally {
             isLoading.value = false;
         }
@@ -73,7 +77,8 @@ export const useReqresApi = () => {
                 body: JSON.stringify(user)
             });
         
-            
+            const data = await response.json() as UserApiResponse;
+            usersData.value?.data.push(data);
         } catch (error) {
             isError.value = true;
         } finally {
