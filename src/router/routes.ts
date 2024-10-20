@@ -12,7 +12,7 @@ const routes = [
     {
       path: '/edit-user/:userId',
       component: () => import('../pages/EditUser.vue'),
-      beforeEnter: async (to) => {
+      beforeEnter: async (to, from, next) => {
         const { usersData, getUsers } = useReqresApi();
 
         if (!usersData.value) {
@@ -21,9 +21,9 @@ const routes = [
 
         const user = usersData.value?.data.find(user => `${user.id}` == to.params.userId);
 
-        if (user) return true
+        if (user) next();
         // reject the navigation
-        return false
+        else next({ name: 'NotFound' })
       },
     },
     {

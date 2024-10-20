@@ -4,7 +4,7 @@
 
         <div class="edit-user">
             <Box class="create-user-box">
-                <form v-if="isLoading" class="form" @submit.prevent="update">
+                <form v-if="!isLoading" class="form" @submit.prevent="update">
                     <div class="form__inputs">
                         <Input label="First Name" v-model="firstName" />
                         <Input label="Last Name" v-model="lastName" />
@@ -13,7 +13,7 @@
                     <Button type="button" :disabled="!canUpdateUser" class="form__button">Update Details</Button>
                 </form>
 
-                <SomethingWentWrong v-else-if="!isError" :tryAgainFunction="update" />
+                <SomethingWentWrong v-else-if="isError" :tryAgainFunction="update" />
 
                 <Loader v-else />
             </Box>
