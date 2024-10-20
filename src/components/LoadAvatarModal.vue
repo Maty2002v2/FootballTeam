@@ -1,7 +1,9 @@
 <template>
     <Modal :showModal="loadAvatarModalState" @closeModal="closeLoadAvatarModal" @saveAction="saveAction">
         <template #title>
-            Add Photo
+            <slot name="modalTitle">
+                Add Photo
+            </slot>
         </template>
 
         <template #content>
@@ -13,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import Modal from './Modal.vue';
 import Input from './Input.vue';
 import { useLoadAvatarModal } from '../composables/Modals/useLoadAvatarModal';
@@ -37,6 +39,10 @@ const saveAction = () => {
     avatarLink.value = dirtyLink.value;
     closeLoadAvatarModal();
 }
+
+onMounted(() => {
+    dirtyLink.value = avatarLink.value;
+})
 </script>
 
 <style lang="scss" scoped>

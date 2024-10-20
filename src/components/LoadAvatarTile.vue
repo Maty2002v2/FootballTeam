@@ -11,7 +11,11 @@
     </div>
 
     <teleport to='#modals'>
-        <LoadAvatarModal />
+        <LoadAvatarModal>
+            <template #modalTitle>
+                <slot name="modalTitle"></slot>
+            </template>
+    </LoadAvatarModal>
     </teleport>
 </template>
 
