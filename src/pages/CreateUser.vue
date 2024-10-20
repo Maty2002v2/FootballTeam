@@ -15,6 +15,7 @@
             </Box>
 
             <Box class="create-user-box">
+                <LoadAvatarTile /> 
             </Box>
         </div>
     </PageBox>
@@ -25,6 +26,7 @@ import PageBox from '../components/PageBox.vue';
 import Box from '../components/Box.vue';
 import Button from '../components/Button.vue';
 import Input from '../components/Input.vue';
+import LoadAvatarTile from '../components/LoadAvatarTile.vue';
 </script>
 
 <style lang="scss" scoped>
