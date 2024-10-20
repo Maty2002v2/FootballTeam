@@ -14,7 +14,7 @@
                 </div>
                 <div class="modal__actions">
                     <slot name="actions">
-                        <Button type="button" @click="closeModal">
+                        <Button type="button" variant="cancel" @click="closeModal">
                             <slot name="cancelButton">Cancel</slot>
                         </Button>
                         <Button type="button" @click="saveAction">

@@ -1,10 +1,10 @@
 <template>
     <div class="custom-button">
-        <button v-if="type === 'button'" class="button">
+        <button v-if="type === 'button'" :class="arrayClass">
             <slot></slot>
         </button>
 
-        <router-link v-else :to="path" class="button">
+        <router-link v-else :to="path" :class="arrayClass">
             <slot></slot>
         </router-link>
 
@@ -20,6 +20,7 @@ interface Props {
     path?: string;
     pill?: boolean;
     disabled?: boolean;
+    variant?: 'save' | 'cancel';
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -27,9 +28,11 @@ const props = withDefaults(defineProps<Props>(), {
     path: '',
     pill: false,
     disabled: false,
+    variant: 'save'
 });
 
 const borderRadius = computed(() => props.pill ? '20px' : '6px');
+const arrayClass = computed(() => ['button', `button--${props.variant}`]);
 </script>
 
 <style lang="scss" scoped>
@@ -43,12 +46,35 @@ const borderRadius = computed(() => props.pill ? '20px' : '6px');
     align-items: center;
     gap: 5px;
     padding: 10px;
+    border: none;
     border-radius: v-bind(borderRadius);
 
     color: #ffffff;
     font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
 
-    background-color: #459571;
+    transition: all 0.1;
+
+    &--save {
+        background-color: #459571;
+
+        &:hover {
+            background-color: #277d57;
+        }
+    }
+
+    &--cancel {
+        background-color: #D2042D;
+
+        &:hover {
+            background-color: #D22B2B ;
+        }
+    }
+
+    &:active {
+        transform: scale(0.9);
+    }
 } 
 
 .disabled-block {
