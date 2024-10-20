@@ -4,7 +4,7 @@
 
         <div class="edit-user">
             <Box class="create-user-box">
-                <form v-if="!isLoading" class="form" @submit.prevent="update">
+                <form v-if="isLoading" class="form" @submit.prevent="update">
                     <div class="form__inputs">
                         <Input label="First Name" v-model="firstName" />
                         <Input label="Last Name" v-model="lastName" />
@@ -12,6 +12,8 @@
 
                     <Button type="button" :disabled="!canUpdateUser" class="form__button">Update Details</Button>
                 </form>
+
+                <SomethingWentWrong v-else-if="!isError" :tryAgainFunction="update" />
 
                 <Loader v-else />
             </Box>
@@ -41,12 +43,13 @@ import Button from '../components/Button.vue';
 import Input from '../components/Input.vue';
 import LoadAvatarTile from '../components/LoadAvatarTile.vue';
 import Loader from '../components/Loader.vue';
+import SomethingWentWrong from '../components/SomethingWentWrong.vue';
 import { useLoadAvatarModal } from '../composables/Modals/useLoadAvatarModal';
 import { useReqresApi } from '../composables/useReqresApi';
 import type { User } from '../types';  
 
 const { avatarLink } = useLoadAvatarModal();
-const { isLoading, usersData, editUser } = useReqresApi();
+const { isLoading, isError, usersData, editUser } = useReqresApi();
 
 const route = useRoute();
 const user = usersData.value?.data.find(user => `${user.id}` == route.params.userId) as User;
