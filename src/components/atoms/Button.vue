@@ -64,10 +64,10 @@ const arrayClass = computed(() => ['button', `button--${props.variant}`]);
     }
 
     &--cancel {
-        background-color: #D2042D;
+        background-color: #D22B2B;
 
         &:hover {
-            background-color: #D22B2B ;
+            background-color: #D2042D;
         }
     }
 

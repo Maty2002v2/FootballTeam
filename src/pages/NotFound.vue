@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import SomethingWentWrong from '../components/SomethingWentWrong.vue';
+import SomethingWentWrong from '../components/molecules/SomethingWentWrong.vue';
 
 const router = useRouter();
 const goToHome = () => {

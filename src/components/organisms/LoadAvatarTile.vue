@@ -22,9 +22,9 @@
 <script lang="ts" setup>
 import { onUnmounted } from 'vue';
 import { Camera } from 'lucide-vue-next';
-import AvatarImage from './AvatarImage.vue';
+import AvatarImage from '../atoms/AvatarImage.vue';
 import LoadAvatarModal from './LoadAvatarModal.vue';
-import { useLoadAvatarModal } from '../composables/Modals/useLoadAvatarModal';
+import { useLoadAvatarModal } from '../../composables/Modals/useLoadAvatarModal';
 
 interface Props {
     path?: string;

@@ -31,7 +31,7 @@
 import { useTemplateRef } from 'vue';
 import { Plus } from 'lucide-vue-next';
 import { onClickOutside } from '@vueuse/core';
-import Button from './Button.vue';
+import Button from '../atoms/Button.vue';
 
 interface Props {
     showModal: boolean;

@@ -21,8 +21,8 @@
 <script lang="ts" setup>
 import { onMounted, watch } from 'vue';
 import { ChevronsLeft, ChevronsRight } from 'lucide-vue-next';
-import { PaginationConfig } from '../types';
-import{ usePagination } from '../composables/usePagination';
+import { PaginationConfig } from '../../types';
+import{ usePagination } from '../../composables/usePagination';
 
 type Props = PaginationConfig & {
     freezing?: boolean

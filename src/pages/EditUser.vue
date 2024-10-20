@@ -36,14 +36,14 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import PageBox from '../components/PageBox.vue';
-import PageHeader from '../components/PageHeader.vue';
-import Box from '../components/Box.vue';
-import Button from '../components/Button.vue';
-import Input from '../components/Input.vue';
-import LoadAvatarTile from '../components/LoadAvatarTile.vue';
-import Loader from '../components/Loader.vue';
-import SomethingWentWrong from '../components/SomethingWentWrong.vue';
+import PageBox from '../components/atoms/PageBox.vue';
+import PageHeader from '../components/atoms/PageHeader.vue';
+import Box from '../components/atoms/Box.vue';
+import Button from '../components/atoms/Button.vue';
+import Input from '../components/atoms/Input.vue';
+import LoadAvatarTile from '../components/organisms/LoadAvatarTile.vue';
+import Loader from '../components/atoms/Loader.vue';
+import SomethingWentWrong from '../components/molecules/SomethingWentWrong.vue';
 import { useLoadAvatarModal } from '../composables/Modals/useLoadAvatarModal';
 import { useReqresApi } from '../composables/useReqresApi';
 import type { User } from '../types';  

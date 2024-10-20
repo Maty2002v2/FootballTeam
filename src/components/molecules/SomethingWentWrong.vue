@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { Bug } from 'lucide-vue-next';
-import Button from './Button.vue';
+import Button from '../atoms/Button.vue';
 
 defineProps<{
     tryAgainFunction?: () => void

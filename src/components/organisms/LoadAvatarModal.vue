@@ -16,9 +16,9 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, watch } from 'vue';
-import Modal from './Modal.vue';
-import Input from './Input.vue';
-import { useLoadAvatarModal } from '../composables/Modals/useLoadAvatarModal';
+import Modal from '../molecules/Modal.vue';
+import Input from '../atoms/Input.vue';
+import { useLoadAvatarModal } from '../../composables/Modals/useLoadAvatarModal';
 
 const dirtyLink = ref<string | undefined>();
 const showError = ref(false);
@@ -48,7 +48,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .error-message {
     margin-top: 20px;
-    color: rgb(250, 67, 67);
+    color: #D2042D;
     font-size: 12px;
 
     .link {

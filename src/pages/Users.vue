@@ -13,11 +13,11 @@
 </template>
 
 <script lang="ts" setup>
-import PageBox from '../components/PageBox.vue';
-import PageHeader from '../components/PageHeader.vue';
-import UsersTable from '../components/UsersTable.vue';
-import Loader from '../components/Loader.vue';
-import SomethingWentWrong from '../components/SomethingWentWrong.vue';
+import PageBox from '../components/atoms/PageBox.vue';
+import PageHeader from '../components/atoms/PageHeader.vue';
+import UsersTable from '../components/organisms/UsersTable.vue';
+import Loader from '../components/atoms/Loader.vue';
+import SomethingWentWrong from '../components/molecules/SomethingWentWrong.vue';
 import { useReqresApi } from '../composables/useReqresApi';
 
 const { usersData, isLoading, isError, getUsers } = useReqresApi();

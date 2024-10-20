@@ -37,13 +37,13 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import { Plus, FilePenLine, Trash } from 'lucide-vue-next';
-import Box from './Box.vue';
-import SearchInput from './SearchInput.vue';
-import Pagination from './Pagination.vue';
-import Button from './Button.vue';
-import AvatarImage from './AvatarImage.vue';
-import { useReqresApi } from '../composables/useReqresApi';
-import type { UsersData, Pagination as PaginationOptions  } from '../types';
+import Box from '../atoms/Box.vue';
+import SearchInput from '../atoms/SearchInput.vue';
+import Pagination from '../molecules/Pagination.vue';
+import Button from '../atoms/Button.vue';
+import AvatarImage from '../atoms/AvatarImage.vue';
+import { useReqresApi } from '../../composables/useReqresApi';
+import type { UsersData, Pagination as PaginationOptions  } from '../../types';
 
 const props = defineProps<{
     usersData: UsersData,

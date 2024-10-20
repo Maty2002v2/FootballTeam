@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import EmptyAvatar from '../assets/EmptyAvatar.png'
+import EmptyAvatar from '../../assets/EmptyAvatar.png'
 
 interface Props {
     path?: string;
@@ -18,8 +18,7 @@ const props = withDefaults(defineProps<Props>(), {
     height: '100%'
 });
 
-const imgSrc = computed(() => props.path.length ? props.path : EmptyAvatar)
-
+const imgSrc = computed(() => props.path.length ? props.path : EmptyAvatar);
 </script>
 
 <style lang="scss" scoped>
