@@ -1,17 +1,25 @@
 <template>
-    <button class="button">
+    <button v-if="type === 'button'" class="button">
         <slot></slot>
     </button>
+
+    <router-link v-else :to="path" class="button">
+        <slot></slot>
+    </router-link>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
 
 interface Props {
+    type: 'button' | 'routerLink';
+    path?: string;
     pill?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
+    type: 'button',
+    path: '',
     pill: false,
 });
 
