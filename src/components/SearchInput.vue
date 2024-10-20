@@ -27,7 +27,7 @@ watch(() => searchDebounced.value, (value) => {
 <style lang="scss" scoped>
 .search {
     position: relative;
-    width: 300px;
+    width: 100%;
 
     &__input {
         width: 100%;
@@ -42,7 +42,7 @@ watch(() => searchDebounced.value, (value) => {
     &__icon {
         position: absolute;
         top: 50%;
-        right: 20px;
+        right: 10px;
         width: 20px;
         height: 20px;
         transform: translate(-50%, -50%);

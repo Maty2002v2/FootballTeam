@@ -1,5 +1,5 @@
 <template>
-    <Box v-if="usersData.data.length">
+    <Box v-if="usersData.data.length" class="users-table">
         <div class="header-actions">
             <SearchInput v-model="search" placeholder="Search for users..."  />
             <Button type="routerLink" path="/create-user" :pill="true"><Plus :size="18" /> Add user</Button>
@@ -65,8 +65,24 @@ const filteredUsers = computed(() => {
 <style lang="scss" scoped>
 .header-actions {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 20px;
+
+    @include breakpoint(md) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .search {
+        width: 100%;
+
+        @include breakpoint(md) {
+            max-width: 300px;
+        }
+    }
 }
 
 .table {
