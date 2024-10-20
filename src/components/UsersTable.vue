@@ -1,12 +1,11 @@
 <template>
-    <div v-if="usersData.data.length" class="wrapper">
+    <Box v-if="usersData.data.length" class="wrapper">
         <div class="header-actions">
             <SearchInput v-model="search" placeholder="Search for users..."  />
-            <Button :pill="true"><Plus :size="18" /> Add user</Button>
+            <Button type="routerLink" path="/create-user" :pill="true"><Plus :size="18" /> Add user</Button>
         </div>
 
         <div class="table">
-            
             <div class="table_row">
                 <div class="table_header table__cell"></div>
                 <div class="table_header table__cell">Full Name</div>
@@ -24,7 +23,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </Box>
 
     <Pagination 
         class="pagination"
@@ -36,6 +35,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import { Plus, FilePenLine, Trash } from 'lucide-vue-next';
+import Box from './Box.vue';
 import SearchInput from './SearchInput.vue';
 import Pagination from './Pagination.vue';
 import Button from './Button.vue';
@@ -68,10 +68,6 @@ const filteredUsers = computed(() => {
     flex-direction: column;
     gap: 30px;
     margin: 0px 10px;
-    padding: 20px;
-    // box-shadow: ;
-    border-radius: 6px;
-    background-color: #FFFFFF;
     
     @include breakpoint(md) {
         width: 1135px;
