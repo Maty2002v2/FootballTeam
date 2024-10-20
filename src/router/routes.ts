@@ -1,3 +1,5 @@
+import { useReqresApi } from '../composables/useReqresApi';
+
 const routes = [
     {
       path: '/',
@@ -8,8 +10,21 @@ const routes = [
       component: () => import('../pages/CreateUser.vue')
     },
     {
-      path: '/edit-user',
-      component: () => import('../pages/EditUser.vue')
+      path: '/edit-user/:userId',
+      component: () => import('../pages/EditUser.vue'),
+      beforeEnter: async (to) => {
+        const { usersData, getUsers } = useReqresApi();
+
+        if (!usersData.value) {
+          await getUsers();
+        }
+
+        const user = usersData.value?.data.find(user => `${user.id}` == to.params.userId);
+
+        if (user) return true
+        // reject the navigation
+        return false
+      },
     },
 ];
 

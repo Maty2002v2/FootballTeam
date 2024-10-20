@@ -18,7 +18,9 @@
                 </div>
                 <div class="table__cell">{{ user.first_name }} {{ user.last_name }}</div>
                 <div class="table__cell table__actions">
-                    <FilePenLine class="table__icon" color="#ABB2BA"/>
+                    <RouterLink :to="`/edit-user/${user.id}`">
+                        <FilePenLine class="table__icon" color="#ABB2BA"/>
+                    </RouterLink>
                     <Trash class="table__icon" color="#ABB2BA"/>
                 </div>
             </div>
