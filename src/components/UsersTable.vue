@@ -2,7 +2,7 @@
     <Box v-if="usersData.data.length" class="users-table">
         <div class="header-actions">
             <SearchInput v-model="search" placeholder="Search for users..."  />
-            <Button type="routerLink" path="/create-user" :pill="true"><Plus :size="18" /> Add user</Button>
+            <Button type="routerLink" path="/create-user" :pill="true"><Plus :size="18" />Add user</Button>
         </div>
 
         <div class="table">
@@ -16,7 +16,7 @@
                 <div class="table__cell">
                     <AvatarImage :src="user.avatar" width="40px" height="40px" />
                 </div>
-                <div class="table__cell">{{ user.first_name + user.last_name }}</div>
+                <div class="table__cell">{{ user.first_name }} {{ user.last_name }}</div>
                 <div class="table__cell table__actions">
                     <FilePenLine class="table__icon" color="#ABB2BA"/>
                     <Trash class="table__icon" color="#ABB2BA"/>
@@ -47,7 +47,6 @@ const props = defineProps<{
 }>();
 
 const search = ref<string | undefined>();
-
 const pagination = ref<PaginationOptions | undefined>();
 
 const filteredUsers = computed(() => {
