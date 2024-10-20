@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import EmptyAvatar from '../assets/test.png'
+import EmptyAvatar from '../assets/EmptyAvatar.png'
 
 interface Props {
     path?: string;
