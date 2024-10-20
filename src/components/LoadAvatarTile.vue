@@ -16,6 +16,7 @@
 </template>
 
 <script lang="ts" setup>
+import { onUnmounted } from 'vue';
 import { Camera } from 'lucide-vue-next';
 import AvatarImage from './AvatarImage.vue';
 import LoadAvatarModal from './LoadAvatarModal.vue';
@@ -30,6 +31,10 @@ withDefaults(defineProps<Props>(), {
 });
 
 const { avatarLink, openLoadAvatarModal } = useLoadAvatarModal();
+
+onUnmounted(() => {
+    avatarLink.value = undefined;
+})
 </script>
 
 <style lang="scss" scoped>

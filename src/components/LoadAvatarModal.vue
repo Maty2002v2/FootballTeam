@@ -26,7 +26,6 @@ watch(loadAvatarModalState, (newValue) => {
     if (!newValue) return;
 
     showError.value = false;
-    avatarLink.value = undefined;
 });
 
 const saveAction = () => {
