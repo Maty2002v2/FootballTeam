@@ -4,12 +4,17 @@
 
 <style lang="scss" scoped>
 .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
   width: 48px;
   height: 48px;
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+  transform: translate(-50%, -50%);
 
   &::before {
       content: "";

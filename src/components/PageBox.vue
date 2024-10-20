@@ -8,6 +8,7 @@
 
 <style lang="scss" scoped>
 .page-box {
+    position: relative;
     max-width: unset;
     width: 100vw;
     margin: 0px 20px;
