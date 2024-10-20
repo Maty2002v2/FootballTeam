@@ -51,7 +51,6 @@ const arrayClass = computed(() => ['button', `button--${props.variant}`]);
 
     color: #ffffff;
     font-size: 13px;
-    font-weight: 600;
     cursor: pointer;
 
     transition: all 0.1;

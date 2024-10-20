@@ -9,7 +9,7 @@
                         <Input label="First Name" v-model="firstName" />
                         <Input label="Last Name" v-model="lastName" />
                     </div>
-
+                    
                     <Button type="button" :disabled="!canCreateUser" class="form__button">Create user</Button>
                 </form>
 

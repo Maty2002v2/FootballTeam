@@ -15,8 +15,6 @@ export const useReqresApi = () => {
     const getUsers = async (): Promise<void> => {
         if (usersData.value) return;
 
-        console.log("getUsers")
-
         isError.value = false;
         isLoading.value = true;
 
